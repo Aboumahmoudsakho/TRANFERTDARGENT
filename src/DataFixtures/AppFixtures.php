@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
 
             $user = new User();
             $user->setrole($Supadmin)
-                 ->setusername("Admin system")
+                 ->setusername("Adminsystem")
                  ->setroles(["Supadmin","admin","caissier"])
                  ->setPassword($this->encoder->encodePassword($user, "role1234"))
                  ->setIsactif("true")

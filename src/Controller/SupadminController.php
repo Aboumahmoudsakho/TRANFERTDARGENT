@@ -13,7 +13,7 @@ class SupadminController extends AbstractController
 {
     /**
      *  
-     * @Route("/api", name="api",methods={"GET"})
+     * @Route("/supadmin", name="api",methods={"GET"})
      */
     public function index(SupadminRepository  $supadmin,SerializerInterface $serializer)
     {
