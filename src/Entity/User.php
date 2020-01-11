@@ -1,11 +1,28 @@
 <?php
 
 namespace App\Entity;
-
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+namespace Symfony\Component\Security\Core\User;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
+ *  @ApiResource(
+ *   collectionOperations={"get", "post"},
+ *     itemOperations={"get"},
+ * itemOperations={
+ *  "put"={"method"="PUT",
+ *  "path"="/users/caissier/{id}",
+ * "security"="is_granted(['ROLE_SUPADMIN','ROLE_ADMIN'])",
+ * "security_message"="Acces refuse. Seul Admin System et admin peuvent bloquer"
+ * },
+ * * "bloquer_admin"={"method"="PUT",
+ * "path"="/users/admin/{id}",
+ * "security"="is_granted(['ROLE_SUPADMIN'])",
+ *  "security_message"="Acces refuse. Seul Admin System  peut bloquer"
+ * },
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface
@@ -155,5 +172,21 @@ class User implements UserInterface
         $this->role = $role;
 
         return $this;
+    }
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+    public function isEnabled()
+    {
+        return $this->Isactif;
     }
 }
